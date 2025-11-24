@@ -1,0 +1,37 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Weather App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="weather-container">
+        <h1>Weather App</h1>
+        <input type="text" id="cityInput" placeholder="Enter city">
+        <button onclick="getWeather()">Get Weather</button>
+        <div id="weatherResult"></div>
+
+<!-- Forecast Tabs -->
+<div class="forecast-container">
+  <div class="tabs">
+    <button class="tab-btn active" id="yesterdayTab">Yesterday</button>
+    <button class="tab-btn" id="todayTab"> Today</button>
+    <button class="tab-btn" id="tomorrowTab"> Tomorrow</button>
+  </div>
+
+  <div id="forecastBox" class="forecast-box">
+    <h3>Weather Info</h3>
+    <div id="forecastContent">Please search a city first.</div>
+  </div>
+</div>
+
+        <!-- <div id="forecastBox" class="forecast-box">
+  <h3>📅 Tomorrow's Forecast</h3>
+  <div id="forecastContent">Loading...</div>
+    </div> -->
+
+    <script src="scripts.js"></script>
+</body>
+</html> 
