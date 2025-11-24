@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storm to Bright Sky Weather Login</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #05080f, #101524);
+    animation: skyShift 18s ease-in-out forwards;
+    position: relative;
+    font-family: Arial, sans-serif;
+  }
+
+  /* ===== SKY TRANSITION ===== */
+  @keyframes skyShift {
+    0%   { background: linear-gradient(to bottom, #05080f, #101524); }
+    25%  { background: linear-gradient(to bottom, #20142b, #3c2e55, #5a4b89); }
+    55%  { background: linear-gradient(to bottom, #5d6ba4, #8fa9d8, #b5cff2); }
+    100% { background: linear-gradient(to bottom, #7ea8f1, #b8d4f9); }
+  }
+
+  /* ===== CLOUDS ===== */
+  .cloud {
+    position: absolute;
+    background: rgba(200,200,200,0.8);
+    border-radius: 50%;
+    box-shadow: -60px 30px 80px rgba(100,100,100,0.3);
+    animation: moveClouds linear infinite;
+  }
+
+  @keyframes moveClouds {
+    0% { transform: translateX(-250px); }
+    100% { transform: translateX(110vw); }
+  }
+
+  /* ===== RAIN ===== */
+  .rain {
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background: rgba(255,255,255,0.7);
+    top: -20px;
+    animation: rainFall linear infinite;
+  }
+
+  @keyframes rainFall {
+    0%   { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0.3; }
+  }
+
+    .login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    text-align: center;
+    color: white;
+    z-index: 5;
+  }
+
+  input, button {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+  }
+
+  button {
+    background: #2f7df4;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  button:hover {
+    background: #1e56c9;
+  }
+</style>
+</head>
+
+<body>
+<div class="login-container">
+  <h2>Weather Login</h2>
+  <input type="text" id="username" placeholder="Username" required>
+  <input type="password" id="password" placeholder="Password" required>
+  <button id="loginBtn">Login</button>
+  <p id="errorMsg"></p>
+</div>
+
+
+<!--============== CLOUDS (13 fixed) ==============-->
+<div class="cloud" style="width:220px;height:120px; top:10%; left:5%; animation-duration:45s;"></div>
+<div class="cloud" style="width:260px;height:150px; top:20%; left:20%; animation-duration:38s;"></div>
+<div class="cloud" style="width:180px;height:100px; top:5%; left:50%; animation-duration:55s;"></div>
+<div class="cloud" style="width:230px;height:130px; top:35%; left:70%; animation-duration:40s;"></div>
+<div class="cloud" style="width:200px;height:110px; top:50%; left:10%; animation-duration:60s;"></div>
+<div class="cloud" style="width:280px;height:160px; top:60%; left:30%; animation-duration:42s;"></div>
+<div class="cloud" style="width:190px;height:105px; top:15%; left:80%; animation-duration:50s;"></div>
+<div class="cloud" style="width:210px;height:115px; top:70%; left:5%; animation-duration:46s;"></div>
+<div class="cloud" style="width:300px;height:170px; top:75%; left:50%; animation-duration:52s;"></div>
+<div class="cloud" style="width:250px;height:140px; top:40%; left:90%; animation-duration:37s;"></div>
+<div class="cloud" style="width:190px;height:110px; top:25%; left:60%; animation-duration:48s;"></div>
+<div class="cloud" style="width:260px;height:150px; top:80%; left:25%; animation-duration:54s;"></div>
+<div class="cloud" style="width:220px;height:130px; top:12%; left:35%; animation-duration:44s;"></div>
+
+<!--============== JS FOR RAIN ONLY ==============-->
+<script>
+  function createRain(num) {
+    for (let i = 0; i < num; i++) {
+      const drop = document.createElement("div");
+      drop.classList.add("rain");
+
+      drop.style.left = Math.random() * 100 + "vw";
+      drop.style.animationDuration = (0.6 + Math.random() * 1.2) + "s";
+      drop.style.animationDelay = Math.random() * 2 + "s";
+
+      document.body.appendChild(drop);
+    }
+  }
+  function login() {
+    const user = document.getElementById("username").value;
+    const pass = document.getElementById("password").value;
+    if (user === "sak" && pass === "24c") {
+      window.location.href = "pro.html";
+    } else {
+      document.getElementById("errorMsg").textContent = "Invalid username or password!";
+    }
+  }
+
+  createRain(120);
+  document.getElementById("loginBtn").addEventListener("click", login);
+</script>
+
+</body>
+</html>
