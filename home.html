@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WeatherSphere - Home</title>
+
+  <style>
+/* ===== Base ===== */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #0b0c2a, #1a1c40);
+  animation: skyCycle 60s ease-in-out forwards;
+  background-size: 400% 400%;
+  transition: background 2s ease-in-out;
+  position: relative;
+}
+
+/* ===== Navbar ===== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(36, 94, 84, 0.85);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  padding: 15px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  z-index: 10;
+}
+nav a {
+  color: white;
+  margin: 0 20px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+nav a:hover {
+  color: #d5e5e7;
+  text-shadow: 0 0 10px #58897a, 0 0 20px #55deeb;
+}
+
+/* ===== Welcome Text ===== */
+h1, p, .enter {
+  text-align: center;
+  z-index: 5;
+  position: relative;
+  animation: fadeIn 2s ease-in-out;
+}
+
+h1 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+  background: linear-gradient(to right, #5270ac, #2a819f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowText 3s ease-in-out infinite alternate;
+}
+p {
+  color: #f1f1f1;
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  font-family: cursive;
+}
+.enter {
+  background: linear-gradient(90deg, #3a64be, #0088ff);
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 12px 35px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 5;
+}
+.enter:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #456f9f, 0 0 40px #07477f;
+}
+
+/* ===== Footer ===== */
+footer {
+  position: fixed;
+  bottom: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  z-index: 5;
+}
+
+/* ===== Clouds ===== */
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  box-shadow: -60px 30px 80px rgba(100, 100, 100, 0.3);
+  animation: moveClouds linear infinite;
+  opacity: 0.8;
+  z-index: 1;
+}
+@keyframes moveClouds {
+  0% { transform: translateX(-200px); }
+  100% { transform: translateX(110vw); }
+}
+
+/* ===== Rain ===== */
+.rain {
+  position: absolute;
+  width: 2px;
+  height: 15px;
+  background: rgba(255, 255, 255, 0.6);
+  top: -10px;
+  animation: fall linear infinite;
+  z-index: 2;
+}
+@keyframes fall {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0.3; }
+}
+
+/* ===== Lightning Glow ===== */
+/* .cloud.glow {
+  background: #fff;
+  filter: brightness(2.2);
+  box-shadow: 0 0 60px 30px rgba(255, 255, 255, 0.7);
+} */
+
+/* ===== Text Animation ===== */
+@keyframes fadeIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+/* @keyframes glowText {
+  from { text-shadow: 0 0 10px #00eaff; }
+  to { text-shadow: 0 0 30px #89f7fe, 0 0 50px #00eaff; }
+} */
+
+/* ===== Sky Color Transition ===== */
+@keyframes skyCycle {
+  0% { background: linear-gradient(to bottom, #2d4681, #385281, #455b7d); }
+  100% { background: linear-gradient(to bottom, #295a93, #365e87, #517598); }
+}
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="loginp.html">Login</a>
+    <a href="pro.html">Weather</a>
+    <a href="about.html">About</a>
+  </nav>
+
+  <h1>Welcome to WeatherSphere</h1>
+  <p>"Climate is what we expect, weather is what we get."</p>
+  <button class="enter" onclick="window.location.href='loginp.html'">Enter App</button>
+
+  <footer>Created with ☁️ by Sak</footer>
+
+  <script>
+  // === CLOUDS ===
+  function createClouds(num) {
+    for (let i = 0; i < num; i++) {
+      const cloud = document.createElement('div');
+      cloud.classList.add('cloud');
+      const size = 120 + Math.random() * 200;
+      cloud.style.width = size + 'px';
+      cloud.style.height = size * 0.6 + 'px';
+      cloud.style.top = Math.random() * 60 + '%';
+      cloud.style.left = Math.random() * 100 + 'vw';
+      cloud.style.animationDuration = 25 + Math.random() * 40 + 's';
+      document.body.appendChild(cloud);
+    }
+  }
+
+  // === RAIN ===
+  function createRain(num) {
+    for (let i = 0; i < num; i++) {
+      const drop = document.createElement('div');
+      drop.classList.add('rain');
+      drop.style.left = Math.random() * 100 + 'vw';
+      drop.style.animationDuration = 0.8 + Math.random() + 's';
+      drop.style.animationDelay = Math.random() * 2 + 's';
+      document.body.appendChild(drop);
+    }
+  }
+
+  // === LIGHTNING EFFECT ===
+  // function lightning() {
+  //   const clouds = document.querySelectorAll('.cloud');
+  //   clouds.forEach(c => c.classList.add('glow'));
+  //   setTimeout(() => clouds.forEach(c => c.classList.remove('glow')), 250);
+  // }
+
+  // function startLightning() {
+  //   let count = 0;
+  //   const flashInterval = setInterval(() => {
+  //     lightning();
+  //     count++;
+  //     if (count > 3) clearInterval(flashInterval);
+  //   }, 2000);
+  // }
+
+  createClouds(15);
+  createRain(100);
+  // startLightning();
+  </script>
+</body>
+</html>
